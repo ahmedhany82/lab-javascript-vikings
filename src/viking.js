@@ -72,7 +72,7 @@ class War {
         let damage = this.saxonArmy[randSaxon].receiveDamage(this.vikingArmy[randViking].attack());
         this.saxonArmy = this.saxonArmy.filter(function(saxon) {
             return (saxon.health > 0);
-        })
+        });
         return damage;
     }
 
@@ -82,7 +82,26 @@ class War {
         let damage = this.vikingArmy[randViking].receiveDamage(this.saxonArmy[randSaxon].attack());
         this.vikingArmy = this.vikingArmy.filter(function(viking) {
             return (viking.health > 0);
-        })
+        });
+        return damage;
+    }
+
+    /* Generic Attack function with a boolean flag as input (true: vikingAttack, false: saxonAttack)*/
+    runAttack(vikingAttack) {
+        let randSaxon = Math.floor(this.saxonArmy.length * Math.random());
+        let randViking = Math.floor(this.vikingArmy.length * Math.random());
+
+        if(vikingAttack === true) {
+            let damage = this.saxonArmy[randSaxon].receiveDamage(this.vikingArmy[randViking].attack());
+            this.saxonArmy = this.saxonArmy.filter(function(saxon) {
+                return (saxon.health > 0);
+            });
+        } else {
+            let damage = this.vikingArmy[randViking].receiveDamage(this.saxonArmy[randSaxon].attack());
+            this.vikingArmy = this.vikingArmy.filter(function(viking) {
+                return (viking.health > 0);
+            });
+        }
         return damage;
     }
 
